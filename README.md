@@ -12,7 +12,7 @@ x264android is a source project for Android NDK, which contains latest X264 code
 BTW, If want to compile into ffmpeg, please use [@ffmpeg4android](https://github.com/chloette/ffmpeg4android) directly.
 
 ##Environment
-***Linux*** only. T_T
+***Android NDK*** only. T_T
 
 ##License
 Should be same as x264...
