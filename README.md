@@ -9,6 +9,10 @@ x264android is a source project for Android NDK, which contains latest X264 code
 3. Add reference `$(call import-module, x264/android/arm)` into Android.mk of your NDK project.
 4. Now ndk-build should work. Tada~
 
+##How to compile
+1. Add path of ndk10 as environment variable : `$NDK10`
+2. Now you can copy `build_android10` into x264 folder and run it to compile. ***Tada~***
+
 BTW, If want to compile into ffmpeg, please use [@ffmpeg4android](https://github.com/chloette/ffmpeg4android) directly.
 
 ##Environment
