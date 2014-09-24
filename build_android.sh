@@ -8,6 +8,7 @@ function build_one
 ./configure \
     --prefix=$PREFIX \
 	--enable-static \
+	--enable-shared \
     --cross-prefix=$TOOLCHAIN/bin/arm-linux-androideabi- \
 	--disable-asm \
 	--disable-cli \

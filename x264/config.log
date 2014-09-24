@@ -1,5 +1,5 @@
 x264 configure script
-Command line options: "--prefix=/mnt/x264/x264/android/arm" "--enable-static" "--cross-prefix=/mnt/ndk/android-ndk-r10/toolchains/arm-linux-androideabi-4.8/prebuilt/linux-x86_64/bin/arm-linux-androideabi-" "--disable-asm" "--disable-cli" "--host=arm-linux" "--sysroot=/mnt/ndk/android-ndk-r10/platforms/android-9/arch-arm/" "--extra-cflags=-Os" "-fpic" "-marm" "--extra-ldflags="
+Command line options: "--prefix=/mnt/x264/x264/android/arm" "--enable-static" "--enable-shared" "--cross-prefix=/mnt/ndk/android-ndk-r10/toolchains/arm-linux-androideabi-4.8/prebuilt/linux-x86_64/bin/arm-linux-androideabi-" "--disable-asm" "--disable-cli" "--host=arm-linux" "--sysroot=/mnt/ndk/android-ndk-r10/platforms/android-9/arch-arm/" "--extra-cflags=-Os" "-fpic" "-marm" "--extra-ldflags="
 
 checking whether /mnt/ndk/android-ndk-r10/toolchains/arm-linux-androideabi-4.8/prebuilt/linux-x86_64/bin/arm-linux-androideabi-gcc works... yes
 checking whether /mnt/ndk/android-ndk-r10/toolchains/arm-linux-androideabi-4.8/prebuilt/linux-x86_64/bin/arm-linux-androideabi-gcc supports for( int i = 0; i < 9; i++ ); with -std=gnu99... yes
@@ -217,6 +217,7 @@ Failed program was:
 int main (void) {  return 0; }
 --------------------------------------------------
 checking for uint32_t test_vec __attribute__ ((vector_size (16))) = {0,1,2,3}; in stdint.h... yes
+checking for stdio.h... yes
 checking for -fno-tree-vectorize... yes
 checking for fseeko(stdin,0,0); in stdio.h... yes
 checking for -Wshadow... yes
@@ -226,7 +227,7 @@ platform:      ARM
 system:        LINUX
 cli:           no
 libx264:       internal
-shared:        no
+shared:        yes
 static:        yes
 asm:           no
 interlaced:    yes
@@ -241,6 +242,6 @@ filters:       crop select_every
 debug:         no
 gprof:         no
 strip:         no
-PIC:           no
+PIC:           yes
 bit depth:     8
 chroma format: all
