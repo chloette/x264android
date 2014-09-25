@@ -1,7 +1,9 @@
 x264android
 ===========
 (x264 README is listed below)
-x264android is a source project for Android NDK, which contains latest X264 codecs.
+x264android is a source project for Android NDK, which contains latest X264 codecs, and **ANDROID-USE-ONLY libraries compiled with x264 encoders**
+
+*** Please make sure, before you follow "How to ***" below, you already knew what's `ndk-build`, `environment-variable` and similar basic technologies. ***
 
 ##How to use
 1. Download [Android NDK](https://developer.android.com/tools/sdk/ndk/index.html)
