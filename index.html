@@ -46,15 +46,33 @@ x264android is a source project for Android NDK, which contains latest X264 code
 </li>
 <li>Add reference <code>$(call import-module, x264/android/arm)</code> into Android.mk of your NDK project.</li>
 <li>Now ndk-build should work. Tada~</li>
-</ol><h2>
-<a name="how-to-compile" class="anchor" href="#how-to-compile"><span class="octicon octicon-link"></span></a>How to compile</h2>
+</ol>
+
+<h2>
+<a name="how-to-compile-static-libraries-be-care--lgpl-limitation-by-default" class="anchor" href="#how-to-compile-static-libraries-be-care--lgpl-limitation-by-default"><span class="octicon octicon-link"></span></a>How to compile static libraries (BE CARE : LGPL limitation) by <strong>DEFAULT</strong>
+</h2>
 
 <ol>
 <li>Add path of ndk10 as environment variable : <code>$NDK10</code>
 </li>
-<li>Now you can copy <code>build_android</code> into x264 folder and run it to compile. <strong><em>Tada~</em></strong>
+<li>Now you can copy <code>build_android.sh</code> into x264 folder and run it to compile. <strong><em>Tada~</em></strong>
 </li>
-</ol><p>BTW, If want to compile into ffmpeg, please use <a href="https://github.com/chloette/ffmpeg4android">@ffmpeg4android</a> directly.</p>
+</ol>
+
+<h2>
+<a name="how-to-compile-shared-libraries" class="anchor" href="#how-to-compile-shared-libraries"><span class="octicon octicon-link"></span></a>How to compile shared libraries</h2>
+
+<ol>
+<li>Follow step 1 and 2 of "How to compile (shared libraries)"</li>
+<li>Use <code>--enable-shared</code> instead of <code>--enable-static</code> in <code>build_android.sh</code>
+</li>
+<li>Now you can run <code>build_android.sh</code> to compile shared libraries. <strong><em>Tada~</em></strong>
+</li>
+<li>One more thing, modify <code>Android.mk</code>, use <code>PREBUILT_SHARED_LIBRARY</code> instead of <code>PREBUILT_STATIC_LIBRARY</code>; And use <code>lib***.so</code> instead of <code>lib***.a</code>
+</li>
+</ol>
+
+<p>BTW, If want to compile into ffmpeg, please use <a href="https://github.com/chloette/ffmpeg4android">@ffmpeg4android</a> directly.</p>
 
 <h2>
 <a name="environment" class="anchor" href="#environment"><span class="octicon octicon-link"></span></a>Environment</h2>
@@ -71,7 +89,9 @@ x264android is a source project for Android NDK, which contains latest X264 code
 
 <p>Any problems please contact me <a href="https://github.com/chloette/x264android">@x264</a> or <code>chloette.e@gmail.com</code></p>
 
-<hr><h2>
+<hr>
+
+<h2>
 <a name="x264" class="anchor" href="#x264"><span class="octicon octicon-link"></span></a>x264</h2>
 
 <blockquote>
