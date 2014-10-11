@@ -2,7 +2,7 @@ LOCAL_PATH:= $(call my-dir)
  
 include $(CLEAR_VARS)
 LOCAL_MODULE:= libx264
-LOCAL_SRC_FILES:= lib/libx264.so
+LOCAL_SRC_FILES:= lib/libx264.a
 LOCAL_EXPORT_C_INCLUDES := $(LOCAL_PATH)/include
-include $(PREBUILT_SHARED_LIBRARY)
+include $(PREBUILT_STATIC_LIBRARY)
 
