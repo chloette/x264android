@@ -11,7 +11,7 @@ x264android is a source project for Android NDK, which contains latest X264 code
 3. Add reference `$(call import-module, x264/android/arm)` into Android.mk of your NDK project.
 4. Now ndk-build should work. Tada~
 
-##How to compile static libraries (BE CARE : LGPL limitation) by **DEFAULT**
+##How to compile static libraries (DEFAULT) (BE CARE : LGPL limitation)
 1. Add path of ndk10 as environment variable : `$NDK10`
 2. Now you can copy `build_android.sh` into x264 folder and run it to compile. ***Tada~***
 
