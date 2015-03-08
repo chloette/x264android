@@ -1,7 +1,7 @@
 /*****************************************************************************
  * rdo.c: rate-distortion optimization
  *****************************************************************************
- * Copyright (C) 2005-2014 x264 project
+ * Copyright (C) 2005-2015 x264 project
  *
  * Authors: Loren Merritt <lorenm@u.washington.edu>
  *          Fiona Glaser <fiona@x264.com>
@@ -186,7 +186,7 @@ static int x264_rd_cost_mb( x264_t *h, int i_lambda2 )
     h->mb.b_transform_8x8 = b_transform_bak;
     h->mb.i_type = type_bak;
 
-    return i_ssd + i_bits;
+    return X264_MIN( i_ssd + i_bits, COST_MAX );
 }
 
 /* partition RD functions use 8 bits more precision to avoid large rounding errors at low QPs */

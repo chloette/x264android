@@ -1,7 +1,7 @@
 /*****************************************************************************
  * set: header writing
  *****************************************************************************
- * Copyright (C) 2003-2014 x264 project
+ * Copyright (C) 2003-2015 x264 project
  *
  * Authors: Laurent Aimar <fenrir@via.ecp.fr>
  *          Loren Merritt <lorenm@u.washington.edu>
@@ -166,7 +166,7 @@ void x264_sps_init( x264_sps_t *sps, int i_id, x264_param_t *param )
     while( (1 << sps->i_log2_max_frame_num) <= max_frame_num )
         sps->i_log2_max_frame_num++;
 
-    sps->i_poc_type = param->i_bframe || param->b_interlaced ? 0 : 2;
+    sps->i_poc_type = param->i_bframe || param->b_interlaced || param->i_avcintra_class ? 0 : 2;
     if( sps->i_poc_type == 0 )
     {
         int max_delta_poc = (param->i_bframe + 2) * (!!param->i_bframe_pyramid + 1) * 2;
@@ -543,7 +543,8 @@ void x264_pps_write( bs_t *s, x264_sps_t *sps, x264_pps_t *pps )
 void x264_sei_recovery_point_write( x264_t *h, bs_t *s, int recovery_frame_cnt )
 {
     bs_t q;
-    uint8_t tmp_buf[100];
+    ALIGNED_4( uint8_t tmp_buf[100] );
+    M32( tmp_buf ) = 0; // shut up gcc
     bs_init( &q, tmp_buf, 100 );
 
     bs_realign( &q );
@@ -577,7 +578,7 @@ int x264_sei_version_write( x264_t *h, bs_t *s )
 
     memcpy( payload, uuid, 16 );
     sprintf( payload+16, "x264 - core %d%s - H.264/MPEG-4 AVC codec - "
-             "Copy%s 2003-2014 - http://www.videolan.org/x264.html - options: %s",
+             "Copy%s 2003-2015 - http://www.videolan.org/x264.html - options: %s",
              X264_BUILD, X264_VERSION, HAVE_GPL?"left":"right", opts );
     length = strlen(payload)+1;
 
@@ -595,7 +596,8 @@ void x264_sei_buffering_period_write( x264_t *h, bs_t *s )
 {
     x264_sps_t *sps = h->sps;
     bs_t q;
-    uint8_t tmp_buf[100];
+    ALIGNED_4( uint8_t tmp_buf[100] );
+    M32( tmp_buf ) = 0; // shut up gcc
     bs_init( &q, tmp_buf, 100 );
 
     bs_realign( &q );
@@ -617,7 +619,8 @@ void x264_sei_pic_timing_write( x264_t *h, bs_t *s )
 {
     x264_sps_t *sps = h->sps;
     bs_t q;
-    uint8_t tmp_buf[100];
+    ALIGNED_4( uint8_t tmp_buf[100] );
+    M32( tmp_buf ) = 0; // shut up gcc
     bs_init( &q, tmp_buf, 100 );
 
     bs_realign( &q );
@@ -648,7 +651,8 @@ void x264_sei_frame_packing_write( x264_t *h, bs_t *s )
 {
     int quincunx_sampling_flag = h->param.i_frame_packing == 0;
     bs_t q;
-    uint8_t tmp_buf[100];
+    ALIGNED_4( uint8_t tmp_buf[100] );
+    M32( tmp_buf ) = 0; // shut up gcc
     bs_init( &q, tmp_buf, 100 );
 
     bs_realign( &q );
@@ -659,7 +663,7 @@ void x264_sei_frame_packing_write( x264_t *h, bs_t *s )
     bs_write1( &q, quincunx_sampling_flag );      // quincunx_sampling_flag
 
     // 0: views are unrelated, 1: left view is on the left, 2: left view is on the right
-    bs_write ( &q, 6, 1 );                        // content_interpretation_type
+    bs_write ( &q, 6, h->param.i_frame_packing != 6 ); // content_interpretation_type
 
     bs_write1( &q, 0 );                           // spatial_flipping_flag
     bs_write1( &q, 0 );                           // frame0_flipped_flag
@@ -701,7 +705,8 @@ void x264_sei_dec_ref_pic_marking_write( x264_t *h, bs_t *s )
 {
     x264_slice_header_t *sh = &h->sh_backup;
     bs_t q;
-    uint8_t tmp_buf[100];
+    ALIGNED_4( uint8_t tmp_buf[100] );
+    M32( tmp_buf ) = 0; // shut up gcc
     bs_init( &q, tmp_buf, 100 );
 
     bs_realign( &q );

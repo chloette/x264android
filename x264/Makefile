@@ -36,6 +36,8 @@ OBJCLI =
 
 OBJCHK = tools/checkasm.o
 
+OBJEXAMPLE = example.o
+
 CONFIG := $(shell cat config.h)
 
 # GPL-only files
@@ -85,12 +87,12 @@ X86SRC0 += sad-a.asm
 endif
 X86SRC = $(X86SRC0:%=common/x86/%)
 
-ifeq ($(ARCH),X86)
+ifeq ($(SYS_ARCH),X86)
 ARCH_X86 = yes
 ASMSRC   = $(X86SRC) common/x86/pixel-32.asm
 endif
 
-ifeq ($(ARCH),X86_64)
+ifeq ($(SYS_ARCH),X86_64)
 ARCH_X86 = yes
 ASMSRC   = $(X86SRC:-32.asm=-64.asm) common/x86/trellis-64.asm
 endif
@@ -104,7 +106,7 @@ endif
 endif
 
 # AltiVec optims
-ifeq ($(ARCH),PPC)
+ifeq ($(SYS_ARCH),PPC)
 ifneq ($(AS),)
 SRCS += common/ppc/mc.c common/ppc/pixel.c common/ppc/dct.c \
         common/ppc/quant.c common/ppc/deblock.c \
@@ -113,7 +115,7 @@ endif
 endif
 
 # NEON optims
-ifeq ($(ARCH),ARM)
+ifeq ($(SYS_ARCH),ARM)
 ifneq ($(AS),)
 ASMSRC += common/arm/cpu-a.S common/arm/pixel-a.S common/arm/mc-a.S \
           common/arm/dct-a.S common/arm/quant-a.S common/arm/deblock-a.S \
@@ -124,15 +126,18 @@ endif
 endif
 
 # AArch64 NEON optims
-ifeq ($(ARCH),AARCH64)
+ifeq ($(SYS_ARCH),AARCH64)
 ifneq ($(AS),)
-ASMSRC += common/aarch64/dct-a.S     \
+ASMSRC += common/aarch64/bitstream-a.S \
+          common/aarch64/cabac-a.S     \
+          common/aarch64/dct-a.S     \
           common/aarch64/deblock-a.S \
           common/aarch64/mc-a.S      \
           common/aarch64/pixel-a.S   \
           common/aarch64/predict-a.S \
           common/aarch64/quant-a.S
-SRCS   += common/aarch64/mc-c.c      \
+SRCS   += common/aarch64/asm-offsets.c \
+          common/aarch64/mc-c.c        \
           common/aarch64/predict-c.c
 OBJASM  = $(ASMSRC:%.S=%.o)
 endif
@@ -176,9 +181,10 @@ $(SONAME): $(GENERATED) .depend $(OBJS) $(OBJASM) $(OBJSO)
 	$(LD)$@ $(OBJS) $(OBJASM) $(OBJSO) $(SOFLAGS) $(LDFLAGS)
 
 ifneq ($(EXE),)
-.PHONY: x264 checkasm
+.PHONY: x264 checkasm example
 x264: x264$(EXE)
 checkasm: checkasm$(EXE)
+example: example$(EXE)
 endif
 
 x264$(EXE): $(GENERATED) .depend $(OBJCLI) $(CLI_LIBX264)
@@ -187,7 +193,10 @@ x264$(EXE): $(GENERATED) .depend $(OBJCLI) $(CLI_LIBX264)
 checkasm$(EXE): $(GENERATED) .depend $(OBJCHK) $(LIBX264)
 	$(LD)$@ $(OBJCHK) $(LIBX264) $(LDFLAGS)
 
-$(OBJS) $(OBJASM) $(OBJSO) $(OBJCLI) $(OBJCHK): .depend
+example$(EXE): $(GENERATED) .depend $(OBJEXAMPLE) $(LIBX264)
+	$(LD)$@ $(OBJEXAMPLE) $(LIBX264) $(LDFLAGS)
+
+$(OBJS) $(OBJASM) $(OBJSO) $(OBJCLI) $(OBJCHK) $(OBJEXAMPLE): .depend
 
 %.o: %.asm common/x86/x86inc.asm common/x86/x86util.asm
 	$(AS) $(ASFLAGS) -o $@ $<
@@ -254,10 +263,11 @@ endif
 clean:
 	rm -f $(OBJS) $(OBJASM) $(OBJCLI) $(OBJSO) $(SONAME) *.a *.lib *.exp *.pdb x264 x264.exe .depend TAGS
 	rm -f checkasm checkasm.exe $(OBJCHK) $(GENERATED) x264_lookahead.clbin
+	rm -f example example.exe $(OBJEXAMPLE)
 	rm -f $(SRC2:%.c=%.gcda) $(SRC2:%.c=%.gcno) *.dyn pgopti.dpi pgopti.dpi.lock *.pgd *.pgc
 
 distclean: clean
-	rm -f config.mak x264_config.h config.h config.log x264.pc x264.def
+	rm -f config.mak x264_config.h config.h config.log x264.pc x264.def conftest*
 
 install-cli: cli
 	$(INSTALL) -d $(DESTDIR)$(bindir)

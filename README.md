@@ -7,12 +7,12 @@ x264android is a source project for Android NDK, which contains latest X264 code
 
 ##How to use
 1. Download [Android NDK](https://developer.android.com/tools/sdk/ndk/index.html)
-2. Put the whole `x264/*` folder (actually, only `x264/android/*` folder should be enough.) under `$NDK/sources/x264/`
-3. Add reference `$(call import-module, x264/android/arm)` into Android.mk of your NDK project.
+2. Put the whole `x264/*` folder (actually, only `x264/android/*` is enough.) under `$NDK_HOME/sources/x264/`
+3. Add reference `$(call import-module, x264/android/arm)` into Android.mk of your project with NDK.
 4. Now ndk-build should work. Tada~
 
 ##How to compile static libraries (DEFAULT) (BE CARE : LGPL limitation)
-1. Add path of ndk10 as environment variable : `$NDK10`
+1. Add path of ndk10 as environment variable : `$NDK_HOME`
 2. Now you can copy `build_android.sh` into x264 folder and run it to compile. ***Tada~***
 
 ##How to compile shared libraries

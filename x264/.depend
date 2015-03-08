@@ -308,9 +308,7 @@ input/avs.o: input/avs.c input/input.h x264cli.h common/common.h \
  extras/cl_platform.h common/cabac.h common/bitstream.h common/set.h \
  common/predict.h common/pixel.h common/mc.h common/frame.h common/dct.h \
  common/quant.h common/cpu.h common/threadpool.h common/macroblock.h \
- common/rectangle.h extras/avxsynth_c.h \
- extras/windowsPorts/windows2linux.h \
- extras/windowsPorts/basicDataTypeConversions.h
+ common/rectangle.h extras/avxsynth_c.h
 input/thread.o: input/thread.c input/input.h x264cli.h common/common.h \
  common/osdep.h config.h x264.h x264_config.h common/opencl.h extras/cl.h \
  extras/cl_platform.h common/cabac.h common/bitstream.h common/set.h \
