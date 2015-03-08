@@ -1,35 +1,35 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
-    <meta charset='utf-8'>
+    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+    <title>X264android by chloette</title>
 
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-
-    <title>X264android by chloette</title>
   </head>
-
   <body>
-    <header>
-      <div class="inner">
+    <div class="wrapper">
+      <header>
         <h1>X264android</h1>
-        <h2>base for X</h2>
-        <a href="https://github.com/chloette/x264android" class="button"><small>View project on</small> GitHub</a>
-      </div>
-    </header>
+        <p>base for X</p>
 
-    <div id="content-wrapper">
-      <div class="inner clearfix">
-        <section id="main-content">
-          <h1>
-<a name="x264android" class="anchor" href="#x264android"><span class="octicon octicon-link"></span></a>x264android</h1>
+        <p class="view"><a href="https://github.com/chloette/x264android">View the Project on GitHub <small>chloette/x264android</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/chloette/x264android/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/chloette/x264android/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/chloette/x264android">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>
+<a id="x264android" class="anchor" href="#x264android" aria-hidden="true"><span class="octicon octicon-link"></span></a>x264android</h1>
 
 <p>(x264 README is listed below)
 x264android is a source project for Android NDK, which contains latest X264 codecs, and <strong>ANDROID-USE-ONLY libraries compiled with x264 encoders</strong></p>
@@ -37,29 +37,29 @@ x264android is a source project for Android NDK, which contains latest X264 code
 <p><strong><em>Please make sure, before you follow "How to xxx" below, you already knew what's <code>ndk-build</code>, <code>environment-variable</code> and similar basic technologies.</em></strong></p>
 
 <h2>
-<a name="how-to-use" class="anchor" href="#how-to-use"><span class="octicon octicon-link"></span></a>How to use</h2>
+<a id="how-to-use" class="anchor" href="#how-to-use" aria-hidden="true"><span class="octicon octicon-link"></span></a>How to use</h2>
 
 <ol>
 <li>Download <a href="https://developer.android.com/tools/sdk/ndk/index.html">Android NDK</a>
 </li>
-<li>Put the whole <code>x264/*</code> folder (actually, only <code>x264/android/*</code> folder should be enough.) under <code>$NDK/sources/x264/</code>
+<li>Put the whole <code>x264/*</code> folder (actually, only <code>x264/android/*</code> is enough.) under <code>$NDK_HOME/sources/x264/</code>
 </li>
-<li>Add reference <code>$(call import-module, x264/android/arm)</code> into Android.mk of your NDK project.</li>
+<li>Add reference <code>$(call import-module, x264/android/arm)</code> into Android.mk of your project with NDK.</li>
 <li>Now ndk-build should work. Tada~</li>
 </ol>
 
 <h2>
-<a name="how-to-compile-static-libraries-default-be-care--lgpl-limitation" class="anchor" href="#how-to-compile-static-libraries-default-be-care--lgpl-limitation"><span class="octicon octicon-link"></span></a>How to compile static libraries (DEFAULT) (BE CARE : LGPL limitation)</h2>
+<a id="how-to-compile-static-libraries-default-be-care--lgpl-limitation" class="anchor" href="#how-to-compile-static-libraries-default-be-care--lgpl-limitation" aria-hidden="true"><span class="octicon octicon-link"></span></a>How to compile static libraries (DEFAULT) (BE CARE : LGPL limitation)</h2>
 
 <ol>
-<li>Add path of ndk10 as environment variable : <code>$NDK10</code>
+<li>Add path of ndk10 as environment variable : <code>$NDK_HOME</code>
 </li>
 <li>Now you can copy <code>build_android.sh</code> into x264 folder and run it to compile. <strong><em>Tada~</em></strong>
 </li>
 </ol>
 
 <h2>
-<a name="how-to-compile-shared-libraries" class="anchor" href="#how-to-compile-shared-libraries"><span class="octicon octicon-link"></span></a>How to compile shared libraries</h2>
+<a id="how-to-compile-shared-libraries" class="anchor" href="#how-to-compile-shared-libraries" aria-hidden="true"><span class="octicon octicon-link"></span></a>How to compile shared libraries</h2>
 
 <ol>
 <li>Follow step 1 and 2 of "How to compile (shared libraries)"</li>
@@ -74,47 +74,35 @@ x264android is a source project for Android NDK, which contains latest X264 code
 <p>BTW, If want to compile into ffmpeg, please use <a href="https://github.com/chloette/ffmpeg4android">@ffmpeg4android</a> directly.</p>
 
 <h2>
-<a name="environment" class="anchor" href="#environment"><span class="octicon octicon-link"></span></a>Environment</h2>
+<a id="environment" class="anchor" href="#environment" aria-hidden="true"><span class="octicon octicon-link"></span></a>Environment</h2>
 
 <p><strong><em>Android NDK</em></strong> only. T_T</p>
 
 <h2>
-<a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h2>
+<a id="license" class="anchor" href="#license" aria-hidden="true"><span class="octicon octicon-link"></span></a>License</h2>
 
 <p>Should be same as x264...</p>
 
 <h2>
-<a name="contact" class="anchor" href="#contact"><span class="octicon octicon-link"></span></a>Contact</h2>
+<a id="contact" class="anchor" href="#contact" aria-hidden="true"><span class="octicon octicon-link"></span></a>Contact</h2>
 
 <p>Any problems please contact me <a href="https://github.com/chloette/x264android">@x264</a> or <code>chloette.e@gmail.com</code></p>
 
 <hr>
 
 <h2>
-<a name="x264" class="anchor" href="#x264"><span class="octicon octicon-link"></span></a>x264</h2>
+<a id="x264" class="anchor" href="#x264" aria-hidden="true"><span class="octicon octicon-link"></span></a>x264</h2>
 
 <blockquote>
 <p>x264 is a free software library and application for encoding video streams into the H.264/MPEG-4 AVC compression format, and is released under the terms of the <strong><em>GNU GPL</em></strong>.</p>
 </blockquote>
-        </section>
-
-        <aside id="sidebar">
-          <a href="https://github.com/chloette/x264android/zipball/master" class="button">
-            <small>Download</small>
-            .zip file
-          </a>
-          <a href="https://github.com/chloette/x264android/tarball/master" class="button">
-            <small>Download</small>
-            .tar.gz file
-          </a>
-
-          <p class="repo-owner"><a href="https://github.com/chloette/x264android"></a> is maintained by <a href="https://github.com/chloette">chloette</a>.</p>
-
-          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
-        </aside>
-      </div>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/chloette">chloette</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
     </div>
-
-  
+    <script src="javascripts/scale.fix.js"></script>
+    
   </body>
 </html>
